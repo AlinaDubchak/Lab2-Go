@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"os"
 	"strings"
 )
 
@@ -31,6 +30,9 @@ func (ch *ComputeHandler) Compute() error {
 	if err != nil {
 		return fmt.Errorf("error solving expression: %v", err)
 	}
-	fmt.Fprint(os.Stdout, string([]byte(result)), "\n")
+	_, err = fmt.Fprintf(ch.Output, "%s", []byte(result))
+	if err != nil {
+		return err
+	}
 	return nil
 }
