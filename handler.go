@@ -13,6 +13,10 @@ type ComputeHandler struct {
 	Output io.Writer
 }
 
+func NewComputeHandler(input io.Reader, output io.Writer) ComputeHandler {
+	return ComputeHandler{input, output}
+}
+
 func (ch *ComputeHandler) Compute() error {
 	buffer := make([]byte, 128)
 	_, err := ch.Input.Read(buffer)
