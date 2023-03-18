@@ -15,9 +15,9 @@ func TestEvaluate(t *testing.T) {
 	TestingT(t)
 }
 
-func ( s *MySuite) TestSimple(c *C) {
+func (s *MySuite) TestSimple(c *C) {
 	expressions := []struct {
-		expr string
+		expr   string
 		wanted string
 	}{
 		{"2 3 +", "5.00"},
@@ -32,12 +32,12 @@ func ( s *MySuite) TestSimple(c *C) {
 	}
 }
 
-func ( s *MySuite) TestComplex (c *C) {
+func (s *MySuite) TestComplex(c *C) {
 	expressions := []struct {
-		expr string
+		expr   string
 		wanted string
-	} {
-	    {"1 2 + 3 * 4 /", "2.25"},
+	}{
+		{"1 2 + 3 * 4 /", "2.25"},
 		{"2 3 + 4 * 5 -", "15.00"},
 		{"2 3 ^ 4 + 5 - 6 /", "1.17"},
 	}
@@ -48,10 +48,10 @@ func ( s *MySuite) TestComplex (c *C) {
 	}
 }
 
-func ( s *MySuite) TestInvalid (c *C) {
+func (s *MySuite) TestInvalid(c *C) {
 	expressions := []struct {
 		expr string
-	} {
+	}{
 		{""},
 		{"2 + 3"},
 		{"2 x 3 +"},

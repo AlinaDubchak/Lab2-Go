@@ -61,5 +61,8 @@ func SolvePostfixExpression(expression string) (string, error) {
 		return "", errors.New("invalid expression")
 	}
 	strRes := fmt.Sprintf("%.2f", stack[0])
+	if strRes == "+Inf" {
+		return "", errors.New("invalid expression")
+	}
 	return strRes, nil
 }

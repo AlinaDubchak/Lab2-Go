@@ -30,7 +30,7 @@ func (ch *ComputeHandler) Compute() error {
 	if err != nil {
 		return fmt.Errorf("error solving expression: %v", err)
 	}
-	_, err = fmt.Fprintf(ch.Output, "%s", []byte(result))
+	_, err = fmt.Fprintf(ch.Output, "%s\n", []byte(result))
 	if err != nil {
 		return err
 	}
