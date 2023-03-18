@@ -1,6 +1,11 @@
 package lab2
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+	"math"
+	"strconv"
+)
 
 func SolvePostfixExpression(expression string) (string, error) {
 	stack := make([]float32, 0)
