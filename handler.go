@@ -1,7 +1,6 @@
 package lab2
 
 import (
-	"bytes"
 	"fmt"
 	"io"
 	"strings"
@@ -17,22 +16,22 @@ func NewComputeHandler(input io.Reader, output io.Writer) ComputeHandler {
 }
 
 func (ch *ComputeHandler) Compute() error {
-	buffer := make([]byte, 128)
-	_, err := ch.Input.Read(buffer)
-	if err != nil {
-		return err
-	}
-	buffer = bytes.Trim(buffer, "\x00")
+  inputBytes, err := io.ReadAll(ch.Input)
+  if err != nil {
+    return err
+  }
 
-	expr := string(buffer)
-	trimeExpr := strings.Trim(expr, " \n")
-	result, err := SolvePostfixExpression(trimeExpr)
-	if err != nil {
-		return fmt.Errorf("error solving expression: %v", err)
-	}
-	_, err = fmt.Fprintf(ch.Output, "%s\n", []byte(result))
-	if err != nil {
-		return err
-	}
-	return nil
+  expr := string(inputBytes)
+  trimmedExpr := strings.TrimSpace(expr)
+  result, err := SolvePostfixExpression(trimmedExpr)
+  if err != nil {
+    return fmt.Errorf("error solving expression: %v", err)
+  }
+
+  _, err = fmt.Fprintf(ch.Output, "%s\n", []byte(result))
+  if err != nil {
+    return err
+  }
+
+  return nil
 }
